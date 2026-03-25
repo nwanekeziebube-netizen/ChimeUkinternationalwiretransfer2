@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="ChimeUK Wire Checks — Simple, fast, low-fee wire check transfers from USA to UK.">
+    <title>ChimeUK • Wire Checks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #10b981;
+        }
+        
+        * {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+            max-width: 420px;
+            margin: 0 auto;
+            background: #f8fafc;
+            overflow-x: hidden;
+        }
+        
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(180deg, #ffffff 0%, #ecfdf5 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -40%;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, #10b981 10%, transparent 70%);
+            opacity: 0.18;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .check-paper {
+            background: linear-gradient(180deg, #f8faf9 0%, #ffffff 100%);
+            box-shadow: 0 10px 30px -10px #10b981,
+                        0 0 0 1.5px #111827;
+            border: 2px solid #111827;
+        }
+        
+        .modal {
+            animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes modalPop {
+            from { transform: scale(0.85); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .micr-line {
+            font-family: monospace;
+            letter-spacing: 2px;
+            font-size: 13px;
+        }
+        
+        input, select, textarea {
+            font-size: 16px !important;
+        }
+    </style>
+</head>
+<body class="tail-container pb-20">
+
+    <!-- NAVBAR -->
+    <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="px-5 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-x-2">
+                <div class="w-8 h-8 bg-emerald-600 rounded-2xl flex items-center justify-center text-white text-2xl">💳</div>
+                <div>
+                    <span class="heading-font text-3xl font-semibold text-emerald-700">Chime</span>
+                    <span class="heading-font text-3xl font-semibold text-slate-900">UK</span>
+                </div>
+            </div>
+            <button onclick="openFormModal()" 
+                    class="bg-emerald-600 text-white text-sm font-semibold px-6 h-9 rounded-3xl flex items-center gap-x-1 shadow-md">
+                <span>Start Now</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero-bg pt-8 pb-10 px-5">
+        <div class="text-center">
+            <div class="inline-flex items-center gap-x-2 bg-white border border-emerald-100 text-emerald-700 text-xs font-medium px-5 h-7 rounded-3xl mb-6">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                LIVE FROM CHIME TO UK
+            </div>
+            
+            <h1 class="heading-font text-5xl leading-none font-semibold text-slate-900 tracking-tight">
+                Wire checks from<br>USA to UK
+            </h1>
+            <p class="mt-3 text-emerald-600 text-xl font-medium">Simple • Fast • Low fees</p>
+            
+            <p class="mt-6 text-slate-600 text-[17px] leading-tight">
+                Send money from your Chime account to any UK bank in under 24 hours.<br>
+                Professional digital checks with full security.
+            </p>
+            
+            <button onclick="openFormModal()" 
+                    class="mt-10 w-full bg-emerald-600 hover:bg-emerald-700 text-white h-14 text-lg font-semibold rounded-3xl shadow-xl shadow-emerald-500/30">
+                Schedule Wire Check Now
+            </button>
+            
+            <div class="mt-8 flex justify-center gap-x-8 text-xs">
+                <div class="flex items-center gap-x-1">
+                    <span class="text-emerald-500">★</span>
+                    <span>4.98</span>
+                </div>
+                <div>18 hrs avg arrival</div>
+                <div>$4.99 fee</div>
+            </div>
+        </div>
+        
+        <!-- Mobile Check Preview -->
+        <div class="mt-12 mx-auto max-w-[320px]">
+            <div class="check-paper rounded-3xl p-6 text-slate-900 text-sm">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-x-2">
+                        <div class="text-3xl">💳</div>
+                        <div class="heading-font text-xl font-semibold">ChimeUK</div>
+                    </div>
+                    <div class="text-right text-xs">
+                        <div>DATE</div>
+                        <div class="font-medium">25 MAR 2026</div>
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <div class="text-xs font-medium">PAY TO THE ORDER OF</div>
+                    <div class="border-b border-slate-400 py-1 text-lg">Sarah Thompson</div>
+                </div>
+                
+                <div class="mt-4 flex justify-between">
+                    <div class="text-xs">$</div>
+                    <div class="text-3xl font-semibold">2,450.00</div>
+                </div>
+                
+                <div class="mt-1 text-sm font-medium">TWO THOUSAND FOUR HUNDRED FIFTY AND 00/100 DOLLARS</div>
+                
+                <div class="mt-6 text-xs flex justify-between">
+                    <div>Memo: Rent March</div>
+                    <div class="text-right">Chime • UK Wire</div>
+                </div>
+                
+                <div class="absolute bottom-4 right-4 bg-emerald-600 text-white text-[10px] font-bold px-3 py-0.5 rounded-2xl -rotate-6">SECURE</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- QUICK STATS -->
+    <div class="bg-emerald-700 text-white py-6 px-5 grid grid-cols-3 gap-4 text-center text-xs">
+        <div>
+            <div class="text-2xl font-semibold">$1.8B</div>
+            <div class="opacity-75">Transferred</div>
+        </div>
+        <div>
+            <div class="text-2xl font-semibold">18 hrs</div>
+            <div class="opacity-75">To UK</div>
+        </div>
+        <div>
+            <div class="text-2xl font-semibold">$4.99</div>
+            <div class="opacity-75">Flat fee</div>
+        </div>
+    </div>
+
+    <!-- BENEFITS -->
+    <div class="px-5 pt-10 pb-8">
+        <h2 class="heading-font text-3xl font-semibold text-center mb-8">Why thousands choose ChimeUK</h2>
+        
+        <div class="space-y-6">
+            <div class="bg-white rounded-3xl p-6 shadow-sm">
+                <div class="text-4xl mb-3">⚡</div>
+                <div class="font-semibold text-xl">Lightning Fast</div>
+                <div class="text-slate-600 text-[15px] mt-1">Money arrives in any UK bank in under 24 hours.</div>
+            </div>
+            <div class="bg-white rounded-3xl p-6 shadow-sm">
+                <div class="text-4xl mb-3">💰</div>
+                <div class="font-semibold text-xl">Lowest Fees</div>
+                <div class="text-slate-600 text-[15px] mt-1">$4.99 or 0.4%. No hidden charges.</div>
+            </div>
+            <div class="bg-white rounded-3xl p-6 shadow-sm">
+                <div class="text-4xl mb-3">🔒</div>
+                <div class="font-semibold text-xl">Bank-Grade Security</div>
+                <div class="text-slate-600 text-[15px] mt-1">256-bit encryption + biometric approval.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="bg-slate-50 px-5 py-10">
+        <div class="text-center mb-8">
+            <span class="text-emerald-600 text-xs font-semibold tracking-widest">3 STEPS • UNDER 1 MINUTE</span>
+            <h2 class="heading-font text-3xl font-semibold mt-2">How it works</h2>
+        </div>
+        
+        <div class="space-y-8">
+            <div class="flex gap-4">
+                <div class="w-9 h-9 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-xl font-semibold flex-shrink-0">1</div>
+                <div>
+                    <div class="font-semibold">Fill the details</div>
+                    <div class="text-slate-600 text-sm mt-1">Recipient name, account number, sort code &amp; amount.</div>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="w-9 h-9 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-xl font-semibold flex-shrink-0">2</div>
+                <div>
+                    <div class="font-semibold">Preview your check</div>
+                    <div class="text-slate-600 text-sm mt-1">See the exact digital check before sending.</div>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="w-9 h-9 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-xl font-semibold flex-shrink-0">3</div>
+                <div>
+                    <div class="font-semibold">Send to UK bank</div>
+                    <div class="text-slate-600 text-sm mt-1">Instant routing to Barclays, HSBC, Lloyds &amp; more.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FEES -->
+    <div class="px-5 py-10">
+        <h2 class="heading-font text-3xl font-semibold text-center">Transparent pricing</h2>
+        <div class="mt-8 bg-white rounded-3xl p-6 text-sm">
+            <div class="flex justify-between py-4 border-b">
+                <div>Wire Check Fee</div>
+                <div class="font-semibold text-emerald-600">$4.99</div>
+            </div>
+            <div class="flex justify-between py-4 border-b">
+                <div>FX Rate</div>
+                <div class="font-semibold text-emerald-600">Mid-market + 0.35%</div>
+            </div>
+            <div class="flex justify-between py-4">
+                <div>UK Bank Fee</div>
+                <div class="font-semibold text-emerald-600">FREE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <div class="mx-5 bg-emerald-600 text-white rounded-3xl p-8 text-center mt-6">
+        <div class="text-2xl font-semibold">Ready to send money to the UK?</div>
+        <button onclick="openFormModal()" 
+                class="mt-6 w-full bg-white text-emerald-700 h-14 rounded-3xl text-lg font-semibold">
+            Schedule Now
+        </button>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="text-center text-xs text-slate-400 mt-16 mb-8 px-5">
+        © 2026 ChimeUK • Secure wire checks from USA to England<br>
+        FDIC • FSCS • 256-bit SSL
+    </div>
+
+    <!-- FORM MODAL -->
+    <div onclick="if(event.target.id==='form-modal')closeFormModal()" id="form-modal" 
+         class="hidden fixed inset-0 bg-black/70 z-[9999] flex items-end">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="bg-white w-full rounded-t-3xl max-h-[92vh] overflow-auto">
+            
+            <div class="sticky top-0 bg-white border-b px-5 py-4 flex items-center justify-between z-10">
+                <div class="font-semibold text-xl">New Wire Check</div>
+                <button onclick="closeFormModal()" class="text-4xl text-slate-300">×</button>
+            </div>
+            
+            <div class="p-5">
+                <form id="wire-form" onsubmit="handleFormSubmit(event)" class="space-y-8">
+                    
+                    <!-- Sender -->
+                    <div>
+                        <div class="uppercase text-emerald-600 text-xs font-semibold mb-3">From your Chime account</div>
+                        <input id="sender-name" type="text" value="Alex Rivera" required placeholder="Full name" 
+                               class="w-full border border-slate-200 rounded-2xl px-5 py-4">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <input id="sender-acc" type="text" value="9876543210" required placeholder="Account #" 
+                                   class="w-full border border-slate-200 rounded-2xl px-5 py-4">
+                        </div>
+                        <div>
+                            <input id="sender-routing" type="text" value="211287298" required placeholder="Routing" 
+                                   class="w-full border border-slate-200 rounded-2xl px-5 py-4">
+                        </div>
+                    </div>
+                    
+                    <!-- Recipient -->
+                    <div>
+                        <div class="uppercase text-emerald-600 text-xs font-semibold mb-3">To UK recipient</div>
+                        <input id="payee-name" type="text" required placeholder="Pay to the order of" 
+                               class="w-full border border-slate-200 rounded-2xl px-5 py-4">
+                    </div>
+                    
+                    <select id="payee-bank" required class="w-full border border-slate-200 rounded-2xl px-5 py-4">
+                        <option value="">Select UK Bank</option>
+                        <option value="Barclays">Barclays</option>
+                        <option value="HSBC">HSBC</option>
+                        <option value="Lloyds Bank">Lloyds Bank</option>
+                        <option value="NatWest">NatWest</option>
+                    </select>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <input id="payee-acc" type="text" maxlength="8" required placeholder="Account Number" 
+                               class="w-full border border-slate-200 rounded-2xl px-5 py-4">
+                        <input id="payee-sort" type="text" maxlength="8" required placeholder="Sort Code" 
+                               class="w-full border border-slate-200 rounded-2xl px-5 py-4 font-mono">
+                    </div>
+                    
+                    <!-- Amount -->
+                    <div>
+                        <label class="text-xs text-slate-500 block mb-2">Amount in USD</label>
+                        <div class="relative">
+                            <span class="absolute left-5 top-1/2 -translate-y-1/2 text-2xl">$</span>
+                            <input id="amount-num" type="text" required placeholder="1250.00" 
+                                   class="w-full border border-slate-200 rounded-2xl pl-10 pr-5 py-4 text-2xl">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <input id="amount-words" type="text" required placeholder="Amount in words" 
+                               class="w-full border border-slate-200 rounded-2xl px-5 py-4">
+                    </div>
+                    
+                    <div>
+                        <textarea id="memo" rows="2" placeholder="Memo (optional)" 
+                                  class="w-full border border-slate-200 rounded-3xl px-5 py-4 resize-none"></textarea>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-emerald-600 text-white h-14 rounded-3xl text-lg font-semibold">
+                        Generate Secure Check
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SPINNER MODAL -->
+    <div id="spinner-modal" class="hidden fixed inset-0 bg-black/70 z-[10000] flex items-center justify-center">
+        <div class="bg-white rounded-3xl px-10 py-8 text-center w-[280px]">
+            <svg class="animate-spin h-12 w-12 text-emerald-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+            <p id="spinner-text" class="mt-5 font-medium">Creating your digital check...</p>
+        </div>
+    </div>
+
+    <!-- CHECK PREVIEW MODAL -->
+    <div onclick="if(event.target.id==='check-modal')closeCheckModal()" id="check-modal" 
+         class="hidden fixed inset-0 bg-black/70 z-[10001] flex items-end">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white w-full rounded-t-3xl">
+            <div class="px-5 py-4 border-b flex justify-between items-center">
+                <div class="font-semibold">Your Digital Check</div>
+                <button onclick="closeCheckModal()" class="text-3xl">×</button>
+            </div>
+            
+            <div id="check-content" class="check-paper mx-5 mt-6 mb-6 rounded-3xl p-6 text-slate-900">
+                <div class="flex justify-between">
+                    <div class="flex items-center gap-x-2">
+                        <span class="text-3xl">💳</span>
+                        <span class="heading-font text-2xl font-semibold">ChimeUK</span>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs">DATE</div>
+                        <div id="check-date" class="font-medium">March 25, 2026</div>
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <div class="text-xs">PAY TO THE ORDER OF</div>
+                    <div id="check-payee-name" class="border-b border-slate-400 py-1 text-xl">Sarah Thompson</div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <div class="text-right">
+                        <span class="text-2xl">$</span>
+                        <span id="check-amount-num" class="text-4xl font-semibold">2,450.00</span>
+                    </div>
+                </div>
+                
+                <div id="check-amount-words" class="mt-2 text-sm font-medium">TWO THOUSAND FOUR HUNDRED FIFTY AND 00/100 DOLLARS</div>
+                
+                <div class="mt-8 text-xs">
+                    <div>MEMO</div>
+                    <div id="check-memo" class="border-b border-slate-400 py-1">Rent for March</div>
+                </div>
+                
+                <div class="mt-6 bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-xs space-y-1">
+                    <div><span class="font-medium">Bank:</span> <span id="check-bank-name">Barclays</span></div>
+                    <div><span class="font-medium">Account:</span> <span id="check-acc-no" class="font-mono">12345678</span></div>
+                    <div><span class="font-medium">Sort Code:</span> <span id="check-sort-code" class="font-mono">12-34-56</span></div>
+                </div>
+            </div>
+            
+            <div class="px-5 pb-8 flex gap-3">
+                <button onclick="printCheck()" 
+                        class="flex-1 border-2 border-slate-900 h-12 rounded-3xl text-sm font-semibold">PRINT CHECK</button>
+                <button onclick="sendToBank()" 
+                        class="flex-1 bg-emerald-600 text-white h-12 rounded-3xl text-sm font-semibold">SEND TO BANK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div id="success-modal" onclick="if(event.target.id==='success-modal')closeAll()" 
+         class="hidden fixed inset-0 bg-black/70 z-[10002] flex items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white rounded-3xl w-[300px] text-center p-8">
+            <div class="text-6xl mb-4">🎉</div>
+            <h2 class="text-2xl font-semibold">Success!</h2>
+            <p id="success-text" class="mt-4 text-slate-600 text-[15px]">Your wire check has been scheduled to Barclays.<br>Receipt sent to your email.</p>
+            
+            <button onclick="closeAll()" 
+                    class="mt-8 w-full bg-emerald-600 text-white h-12 rounded-3xl font-semibold">Done</button>
+        </div>
+    </div>
+
+    <script>
+        function openFormModal() {
+            document.getElementById('form-modal').classList.remove('hidden')
+            document.getElementById('form-modal').classList.add('flex')
+        }
+        
+        function closeFormModal() {
+            const modal = document.getElementById('form-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+        }
+        
+        function handleFormSubmit(e) {
+            e.preventDefault()
+            
+            const formData = {
+                payeeName: document.getElementById('payee-name').value || "Recipient",
+                payeeBank: document.getElementById('payee-bank').value || "UK Bank",
+                payeeAcc: document.getElementById('payee-acc').value || "12345678",
+                payeeSort: document.getElementById('payee-sort').value || "12-34-56",
+                amountNum: document.getElementById('amount-num').value || "1250.00",
+                amountWords: document.getElementById('amount-words').value || "One thousand two hundred fifty and 00/100",
+                memo: document.getElementById('memo').value || "No memo"
+            }
+            
+            window.lastFormData = formData
+            closeFormModal()
+            
+            showSpinner("Generating professional check...")
+            
+            setTimeout(() => {
+                hideSpinner()
+                showCheckPreview(formData)
+            }, 1600)
+        }
+        
+        function showSpinner(msg) {
+            document.getElementById('spinner-text').innerHTML = msg
+            document.getElementById('spinner-modal').classList.remove('hidden')
+        }
+        
+        function hideSpinner() {
+            document.getElementById('spinner-modal').classList.add('hidden')
+        }
+        
+        function showCheckPreview(data) {
+            document.getElementById('check-date').textContent = "March 25, 2026"
+            document.getElementById('check-payee-name').textContent = data.payeeName
+            document.getElementById('check-amount-num').textContent = data.amountNum
+            document.getElementById('check-amount-words').textContent = data.amountWords.toUpperCase()
+            document.getElementById('check-memo').textContent = data.memo
+            document.getElementById('check-bank-name').textContent = data.payeeBank
+            document.getElementById('check-acc-no').textContent = data.payeeAcc
+            document.getElementById('check-sort-code').textContent = data.payeeSort
+            
+            document.getElementById('check-modal').classList.remove('hidden')
+            document.getElementById('check-modal').classList.add('flex')
+        }
+        
+        function closeCheckModal() {
+            const modal = document.getElementById('check-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+        }
+        
+        function printCheck() {
+            alert("✅ Check sent to your printer (demo mode)")
+        }
+        
+        function sendToBank() {
+            closeCheckModal()
+            showSpinner("Sending to UK bank...")
+            
+            setTimeout(() => {
+                hideSpinner()
+                const data = window.lastFormData
+                document.getElementById('success-text').innerHTML = 
+                    `Your wire check has been scheduled to <strong>${data.payeeBank}</strong>.<br>Receipt sent to your email.`
+                document.getElementById('success-modal').classList.remove('hidden')
+            }, 1800)
+        }
+        
+        function closeAll() {
+            document.getElementById('success-modal').classList.add('hidden')
+            document.getElementById('check-modal').classList.add('hidden')
+            document.getElementById('spinner-modal').classList.add('hidden')
+        }
+        
+        // Close modals with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                closeFormModal()
+                closeCheckModal()
+                document.getElementById('success-modal').classList.add('hidden')
+                document.getElementById('spinner-modal').classList.add('hidden')
+            }
+        })
+        
+        console.log("%c✅ Mobile-optimized ChimeUK Wire Check ready. Fully responsive for phones only.", "color:#10b981; font-weight:bold")
+    </script>
+</body>
+</html>
