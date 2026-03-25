@@ -46,11 +46,45 @@
             opacity: 0.18;
         }
         
-        .check-paper {
-            background: linear-gradient(180deg, #f8faf9 0%, #ffffff 100%);
-            box-shadow: 0 10px 30px -10px #10b981,
-                        0 0 0 1.5px #111827;
-            border: 2px solid #111827;
+        .real-check {
+            background: #f9f6f0;
+            border: 3px solid #1f2937;
+            box-shadow: 0 15px 35px -10px rgba(16, 185, 129, 0.4),
+                        inset 0 0 80px rgba(255,255,255,0.6);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            color: #111827;
+            line-height: 1.1;
+        }
+        
+        .real-check::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 18px;
+            background: repeating-linear-gradient(
+                45deg,
+                #10b981,
+                #10b981 8px,
+                transparent 8px,
+                transparent 16px
+            );
+            opacity: 0.15;
+        }
+        
+        .real-check .amount-box {
+            border: 2px solid #1f2937;
+            background: white;
+        }
+        
+        .micr {
+            font-family: monospace;
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #1f2937;
         }
         
         .modal {
@@ -62,22 +96,12 @@
             to { transform: scale(1); opacity: 1; }
         }
         
-        .micr-line {
-            font-family: monospace;
-            letter-spacing: 2px;
-            font-size: 13px;
-        }
-        
         input, select, textarea {
             font-size: 16px !important;
         }
         
         .check-card {
             transition: all 0.3s ease;
-        }
-        
-        .check-card:hover {
-            transform: translateY(-4px);
         }
     </style>
 </head>
@@ -136,43 +160,53 @@
             </div>
         </div>
         
-        <!-- Mobile Check Preview -->
+        <!-- Realistic Check Preview in Hero -->
         <div class="mt-12 mx-auto max-w-[320px]">
-            <div class="check-paper rounded-3xl p-6 text-slate-900 text-sm">
-                <div class="flex justify-between items-start">
+            <div class="real-check rounded-3xl p-6 text-sm relative" style="height: 190px;">
+                <div class="flex justify-between">
                     <div class="flex items-center gap-x-2">
-                        <div class="text-3xl">💳</div>
-                        <div class="heading-font text-xl font-semibold">ChimeUK</div>
+                        <span class="text-3xl">🏦</span>
+                        <div>
+                            <div class="font-bold text-lg tracking-wider">CHIME</div>
+                            <div class="text-[10px] text-emerald-700 -mt-1">FINANCIAL • USA</div>
+                        </div>
                     </div>
                     <div class="text-right text-xs">
-                        <div>DATE</div>
-                        <div class="font-medium">25 MAR 2026</div>
+                        <div class="font-medium">DATE</div>
+                        <div id="hero-date" class="font-bold">MAR 25 2026</div>
                     </div>
                 </div>
                 
-                <div class="mt-6">
-                    <div class="text-xs font-medium">PAY TO THE ORDER OF</div>
-                    <div class="border-b border-slate-400 py-1 text-lg">Sarah Thompson</div>
+                <div class="mt-5 flex justify-between items-end">
+                    <div class="flex-1">
+                        <div class="text-[10px] uppercase tracking-widest">Pay to the Order of</div>
+                        <div class="border-b border-black py-px text-base font-medium">Sarah Thompson</div>
+                    </div>
+                    <div class="amount-box px-3 py-1 ml-4 text-right min-w-[110px]">
+                        <div class="text-xs">$</div>
+                        <div class="text-2xl font-bold">2450.00</div>
+                    </div>
                 </div>
                 
-                <div class="mt-4 flex justify-between">
-                    <div class="text-xs">$</div>
-                    <div class="text-3xl font-semibold">2,450.00</div>
+                <div class="mt-2 text-xs font-medium">TWO THOUSAND FOUR HUNDRED FIFTY AND 00/100 DOLLARS</div>
+                
+                <div class="absolute bottom-4 left-6 text-[10px] flex items-center gap-x-2">
+                    <span>MEMO:</span>
+                    <span class="border-b border-black w-24">Rent March</span>
                 </div>
                 
-                <div class="mt-1 text-sm font-medium">TWO THOUSAND FOUR HUNDRED FIFTY AND 00/100 DOLLARS</div>
-                
-                <div class="mt-6 text-xs flex justify-between">
-                    <div>Memo: Rent March</div>
-                    <div class="text-right">Chime • UK Wire</div>
+                <div class="absolute bottom-4 right-6 text-[9px] text-right leading-none">
+                    ROUTING 211287298<br>
+                    ACCT 9876543210
                 </div>
                 
-                <div class="absolute bottom-4 right-4 bg-emerald-600 text-white text-[10px] font-bold px-3 py-0.5 rounded-2xl -rotate-6">SECURE</div>
+                <!-- Green security band -->
+                <div class="absolute bottom-0 left-0 right-0 h-5 bg-emerald-600 opacity-20 flex items-center justify-center text-[10px] text-white font-bold tracking-widest">SECURE WIRE • FOR DEPOSIT ONLY</div>
             </div>
         </div>
     </header>
 
-    <!-- NEW CHECK TYPES SECTION -->
+    <!-- CHECK TYPES SECTION -->
     <div class="px-5 py-10 bg-white">
         <h2 class="heading-font text-3xl font-semibold text-center mb-2">Choose Your Check Type</h2>
         <p class="text-center text-slate-500 text-sm mb-8">All checks from $10,000 and above</p>
@@ -247,10 +281,9 @@
         </div>
     </div>
 
-    <!-- BENEFITS -->
+    <!-- BENEFITS, HOW IT WORKS, FEES, CTA and Footer remain exactly the same as previous version -->
     <div class="px-5 pt-10 pb-8">
         <h2 class="heading-font text-3xl font-semibold text-center mb-8">Why thousands choose ChimeUK</h2>
-        
         <div class="space-y-6">
             <div class="bg-white rounded-3xl p-6 shadow-sm">
                 <div class="text-4xl mb-3">⚡</div>
@@ -270,13 +303,11 @@
         </div>
     </div>
 
-    <!-- HOW IT WORKS -->
     <div class="bg-slate-50 px-5 py-10">
         <div class="text-center mb-8">
             <span class="text-emerald-600 text-xs font-semibold tracking-widest">3 STEPS • UNDER 1 MINUTE</span>
             <h2 class="heading-font text-3xl font-semibold mt-2">How it works</h2>
         </div>
-        
         <div class="space-y-8">
             <div class="flex gap-4">
                 <div class="w-9 h-9 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-xl font-semibold flex-shrink-0">1</div>
@@ -302,7 +333,6 @@
         </div>
     </div>
 
-    <!-- FEES -->
     <div class="px-5 py-10">
         <h2 class="heading-font text-3xl font-semibold text-center">Transparent pricing</h2>
         <div class="mt-8 bg-white rounded-3xl p-6 text-sm">
@@ -321,7 +351,6 @@
         </div>
     </div>
 
-    <!-- FINAL CTA -->
     <div class="mx-5 bg-emerald-600 text-white rounded-3xl p-8 text-center mt-6">
         <div class="text-2xl font-semibold">Ready to send money to the UK?</div>
         <button onclick="openFormModal()" 
@@ -330,51 +359,38 @@
         </button>
     </div>
 
-    <!-- FOOTER -->
     <div class="text-center text-xs text-slate-400 mt-16 mb-8 px-5">
         © 2026 ChimeUK • Secure wire checks from USA to England<br>
         FDIC • FSCS • 256-bit SSL
     </div>
 
-    <!-- FORM MODAL (with amount validation) -->
+    <!-- FORM MODAL -->
     <div onclick="if(event.target.id==='form-modal')closeFormModal()" id="form-modal" 
          class="hidden fixed inset-0 bg-black/70 z-[9999] flex items-end">
         <div onclick="event.stopImmediatePropagation()" 
              class="bg-white w-full rounded-t-3xl max-h-[92vh] overflow-auto">
-            
             <div class="sticky top-0 bg-white border-b px-5 py-4 flex items-center justify-between z-10">
                 <div class="font-semibold text-xl">New Wire Check</div>
                 <button onclick="closeFormModal()" class="text-4xl text-slate-300">×</button>
             </div>
-            
             <div class="p-5">
                 <form id="wire-form" onsubmit="handleFormSubmit(event)" class="space-y-8">
-                    
-                    <!-- Sender -->
                     <div>
                         <div class="uppercase text-emerald-600 text-xs font-semibold mb-3">From your Chime account</div>
                         <input id="sender-name" type="text" value="Alex Rivera" required placeholder="Full name" 
                                class="w-full border border-slate-200 rounded-2xl px-5 py-4">
                     </div>
-                    
                     <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <input id="sender-acc" type="text" value="9876543210" required placeholder="Account #" 
-                                   class="w-full border border-slate-200 rounded-2xl px-5 py-4">
-                        </div>
-                        <div>
-                            <input id="sender-routing" type="text" value="211287298" required placeholder="Routing" 
-                                   class="w-full border border-slate-200 rounded-2xl px-5 py-4">
-                        </div>
+                        <input id="sender-acc" type="text" value="9876543210" required placeholder="Account #" 
+                               class="w-full border border-slate-200 rounded-2xl px-5 py-4">
+                        <input id="sender-routing" type="text" value="211287298" required placeholder="Routing" 
+                               class="w-full border border-slate-200 rounded-2xl px-5 py-4">
                     </div>
-                    
-                    <!-- Recipient -->
                     <div>
                         <div class="uppercase text-emerald-600 text-xs font-semibold mb-3">To UK recipient</div>
                         <input id="payee-name" type="text" required placeholder="Pay to the order of" 
                                class="w-full border border-slate-200 rounded-2xl px-5 py-4">
                     </div>
-                    
                     <select id="payee-bank" required class="w-full border border-slate-200 rounded-2xl px-5 py-4">
                         <option value="">Select UK Bank</option>
                         <option value="Barclays">Barclays</option>
@@ -382,15 +398,12 @@
                         <option value="Lloyds Bank">Lloyds Bank</option>
                         <option value="NatWest">NatWest</option>
                     </select>
-                    
                     <div class="grid grid-cols-2 gap-4">
                         <input id="payee-acc" type="text" maxlength="8" required placeholder="Account Number" 
                                class="w-full border border-slate-200 rounded-2xl px-5 py-4">
                         <input id="payee-sort" type="text" maxlength="8" required placeholder="Sort Code" 
                                class="w-full border border-slate-200 rounded-2xl px-5 py-4 font-mono">
                     </div>
-                    
-                    <!-- Amount -->
                     <div>
                         <label class="text-xs text-slate-500 block mb-2">Amount in USD <span class="text-red-500">(Minimum $15,000)</span></label>
                         <div class="relative">
@@ -399,19 +412,15 @@
                                    class="w-full border border-slate-200 rounded-2xl pl-10 pr-5 py-4 text-2xl">
                         </div>
                     </div>
-                    
                     <div>
                         <input id="amount-words" type="text" required placeholder="Amount in words" 
                                class="w-full border border-slate-200 rounded-2xl px-5 py-4">
                     </div>
-                    
                     <div>
                         <textarea id="memo" rows="2" placeholder="Memo (optional)" 
                                   class="w-full border border-slate-200 rounded-3xl px-5 py-4 resize-none"></textarea>
                     </div>
-                    
-                    <button type="submit" 
-                            class="w-full bg-emerald-600 text-white h-14 rounded-3xl text-lg font-semibold">
+                    <button type="submit" class="w-full bg-emerald-600 text-white h-14 rounded-3xl text-lg font-semibold">
                         Generate Secure Check
                     </button>
                 </form>
@@ -419,7 +428,7 @@
         </div>
     </div>
 
-    <!-- SPINNER MODAL -->
+    <!-- SPINNER -->
     <div id="spinner-modal" class="hidden fixed inset-0 bg-black/70 z-[10000] flex items-center justify-center">
         <div class="bg-white rounded-3xl px-10 py-8 text-center w-[280px]">
             <svg class="animate-spin h-12 w-12 text-emerald-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -430,51 +439,65 @@
         </div>
     </div>
 
-    <!-- CHECK PREVIEW MODAL -->
+    <!-- REALISTIC CHECK PREVIEW MODAL -->
     <div onclick="if(event.target.id==='check-modal')closeCheckModal()" id="check-modal" 
          class="hidden fixed inset-0 bg-black/70 z-[10001] flex items-end">
         <div onclick="event.stopImmediatePropagation()" class="bg-white w-full rounded-t-3xl">
             <div class="px-5 py-4 border-b flex justify-between items-center">
-                <div class="font-semibold">Your Digital Check</div>
+                <div class="font-semibold">Your Professional Bank Check</div>
                 <button onclick="closeCheckModal()" class="text-3xl">×</button>
             </div>
             
-            <div id="check-content" class="check-paper mx-5 mt-6 mb-6 rounded-3xl p-6 text-slate-900">
-                <div class="flex justify-between">
-                    <div class="flex items-center gap-x-2">
-                        <span class="text-3xl">💳</span>
-                        <span class="heading-font text-2xl font-semibold">ChimeUK</span>
+            <div id="check-content" class="real-check mx-5 mt-6 mb-6 rounded-3xl p-7 text-base" style="height: 280px;">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-x-3">
+                        <span class="text-4xl">🏦</span>
+                        <div>
+                            <div class="font-bold text-2xl tracking-widest">CHIME</div>
+                            <div class="text-xs text-emerald-700 -mt-1">FINANCIAL INSTITUTION</div>
+                        </div>
                     </div>
                     <div class="text-right">
-                        <div class="text-xs">DATE</div>
-                        <div id="check-date" class="font-medium">March 25, 2026</div>
+                        <div class="text-xs font-medium">DATE</div>
+                        <div id="check-date" class="font-bold text-xl">MAR 25 2026</div>
                     </div>
                 </div>
                 
-                <div class="mt-8">
-                    <div class="text-xs">PAY TO THE ORDER OF</div>
-                    <div id="check-payee-name" class="border-b border-slate-400 py-1 text-xl">Sarah Thompson</div>
-                </div>
-                
-                <div class="mt-6 flex justify-end">
-                    <div class="text-right">
-                        <span class="text-2xl">$</span>
-                        <span id="check-amount-num" class="text-4xl font-semibold">2,450.00</span>
+                <div class="mt-6 flex justify-between">
+                    <div class="flex-1 pr-4">
+                        <div class="text-xs uppercase tracking-widest">Pay to the Order of</div>
+                        <div id="check-payee-name" class="border-b-2 border-black py-1 text-xl font-medium">Sarah Thompson</div>
+                    </div>
+                    <div class="amount-box px-4 py-2 text-right border-2 border-black min-w-[130px]">
+                        <div class="text-xs">$</div>
+                        <div id="check-amount-num" class="text-3xl font-bold">15000.00</div>
                     </div>
                 </div>
                 
-                <div id="check-amount-words" class="mt-2 text-sm font-medium">TWO THOUSAND FOUR HUNDRED FIFTY AND 00/100 DOLLARS</div>
+                <div id="check-amount-words" class="mt-2 text-sm font-medium uppercase">FIFTEEN THOUSAND AND 00/100 DOLLARS</div>
                 
-                <div class="mt-8 text-xs">
-                    <div>MEMO</div>
-                    <div id="check-memo" class="border-b border-slate-400 py-1">Rent for March</div>
+                <div class="mt-6 flex justify-between text-xs">
+                    <div>
+                        <span class="font-medium">MEMO</span><br>
+                        <span id="check-memo" class="border-b border-black w-40 inline-block">Wire Transfer</span>
+                    </div>
+                    <div class="text-right text-[10px]">
+                        Routing: 211287298<br>
+                        Account: 9876543210
+                    </div>
                 </div>
                 
-                <div class="mt-6 bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-xs space-y-1">
-                    <div><span class="font-medium">Bank:</span> <span id="check-bank-name">Barclays</span></div>
-                    <div><span class="font-medium">Account:</span> <span id="check-acc-no" class="font-mono">12345678</span></div>
-                    <div><span class="font-medium">Sort Code:</span> <span id="check-sort-code" class="font-mono">12-34-56</span></div>
+                <!-- UK Details -->
+                <div class="absolute bottom-8 left-7 right-7 bg-white/90 border border-emerald-600 rounded-xl p-3 text-xs">
+                    <div class="flex justify-between">
+                        <div><span class="font-medium">UK Bank:</span> <span id="check-bank-name">Barclays</span></div>
+                        <div><span class="font-medium">Acct:</span> <span id="check-acc-no" class="font-mono">12345678</span></div>
+                        <div><span class="font-medium">Sort:</span> <span id="check-sort-code" class="font-mono">12-34-56</span></div>
+                    </div>
                 </div>
+                
+                <!-- MICR Line -->
+                <div class="micr absolute bottom-2 left-6 right-6 text-center">211287298  9876543210  00000000</div>
             </div>
             
             <div class="px-5 pb-8 flex gap-3">
@@ -493,13 +516,11 @@
             <div class="text-6xl mb-4">🎉</div>
             <h2 class="text-2xl font-semibold">Success!</h2>
             <p id="success-text" class="mt-4 text-slate-600 text-[15px]">Your wire check has been scheduled.<br>Receipt sent to your email.</p>
-            
-            <button onclick="closeAll()" 
-                    class="mt-8 w-full bg-emerald-600 text-white h-12 rounded-3xl font-semibold">Done</button>
+            <button onclick="closeAll()" class="mt-8 w-full bg-emerald-600 text-white h-12 rounded-3xl font-semibold">Done</button>
         </div>
     </div>
 
-    <!-- CASH APP PAYMENT MODAL (for purchased checks) -->
+    <!-- CASH APP PAYMENT MODAL -->
     <div id="cashapp-modal" onclick="if(event.target.id==='cashapp-modal')closeCashApp()" 
          class="hidden fixed inset-0 bg-black/70 z-[10003] flex items-center justify-center">
         <div onclick="event.stopImmediatePropagation()" class="bg-white rounded-3xl w-[320px] p-8 text-center">
@@ -517,9 +538,7 @@
             </div>
             <div class="mt-8 text-emerald-600 font-medium">Send to $ChimeUKOfficial</div>
             <p class="text-xs text-slate-400 mt-2">After payment, your check will be activated instantly</p>
-            
-            <button onclick="completeCashAppPayment()" 
-                    class="mt-8 w-full bg-emerald-600 text-white h-12 rounded-3xl text-sm font-semibold">I Have Sent the Payment</button>
+            <button onclick="completeCashAppPayment()" class="mt-8 w-full bg-emerald-600 text-white h-12 rounded-3xl text-sm font-semibold">I Have Sent the Payment</button>
         </div>
     </div>
 
@@ -553,13 +572,12 @@
                 payeeSort: document.getElementById('payee-sort').value || "12-34-56",
                 amountNum: amountStr,
                 amountWords: document.getElementById('amount-words').value || "Fifteen thousand and 00/100",
-                memo: document.getElementById('memo').value || "No memo"
+                memo: document.getElementById('memo').value || "Wire Transfer"
             }
             
             window.lastFormData = formData
             closeFormModal()
-            
-            showSpinner("Creating your professional digital check...")
+            showSpinner("Creating your professional bank check...")
             
             setTimeout(() => {
                 hideSpinner()
@@ -577,9 +595,9 @@
         }
         
         function showCheckPreview(data) {
-            document.getElementById('check-date').textContent = "March 25, 2026"
+            document.getElementById('check-date').textContent = "MAR 25 2026"
             document.getElementById('check-payee-name').textContent = data.payeeName
-            document.getElementById('check-amount-num').textContent = data.amountNum
+            document.getElementById('check-amount-num').textContent = parseFloat(data.amountNum).toLocaleString('en-US')
             document.getElementById('check-amount-words').textContent = data.amountWords.toUpperCase()
             document.getElementById('check-memo').textContent = data.memo
             document.getElementById('check-bank-name').textContent = data.payeeBank
@@ -597,12 +615,11 @@
         }
         
         function printCheck() {
-            alert("✅ Check sent to your printer (demo mode)")
+            alert("✅ Check ready for printing (demo mode)")
         }
         
         function sendToBank() {
             closeCheckModal()
-            // Show error for amount validation on send
             alert("Error: This check is invalid for the entered amount.\n\nPlease get another check and try again.")
         }
         
@@ -612,24 +629,15 @@
             document.getElementById('spinner-modal').classList.add('hidden')
         }
         
-        // New functions for purchasing check types
         function buyCheck(type) {
             let price = 0
             let name = ""
             
-            if (type === 1) {
-                price = 9.99
-                name = "Standard Wire Check"
-            } else if (type === 2) {
-                price = 19.99
-                name = "Premium Express Check"
-            } else if (type === 3) {
-                price = 49.99
-                name = "VIP High Value Check"
-            }
+            if (type === 1) { price = 9.99; name = "Standard Wire Check"; }
+            else if (type === 2) { price = 19.99; name = "Premium Express Check"; }
+            else if (type === 3) { price = 49.99; name = "VIP High Value Check"; }
             
             showSpinner("Processing payment...")
-            
             setTimeout(() => {
                 hideSpinner()
                 document.getElementById('cashapp-type').textContent = name
@@ -640,8 +648,9 @@
         }
         
         function closeCashApp() {
-            document.getElementById('cashapp-modal').classList.add('hidden')
-            document.getElementById('cashapp-modal').classList.remove('flex')
+            const modal = document.getElementById('cashapp-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
         }
         
         function completeCashAppPayment() {
@@ -654,7 +663,6 @@
             }, 1600)
         }
         
-        // Close modals with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === "Escape") {
                 closeFormModal()
@@ -665,7 +673,7 @@
             }
         })
         
-        console.log("%c✅ Mobile-optimized ChimeUK Wire Check with new features ready.", "color:#10b981; font-weight:bold")
+        console.log("%c✅ Mobile ChimeUK with realistic bank check design ready.", "color:#10b981; font-weight:bold")
     </script>
 </body>
 </html>
